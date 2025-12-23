@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WAVE BOT - Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="bg-animation">
+        <div class="bg-gradient"></div>
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+        <div class="stars"></div>
+        <canvas id="particles-canvas"></canvas>
+        <div class="mouse-glow" id="mouse-glow"></div>
+    </div>
+
+    <div class="dashboard">
+        <!-- Navbar -->
+        <nav class="navbar">
+            <div class="nav-brand">
+                <span class="brand-icon">🎵</span>
+                <span class="brand-name">WAVE BOT</span>
+            </div>
+            <div class="nav-links">
+                <a href="#" class="nav-link active" data-page="home">หน้าแรก</a>
+                <a href="#" class="nav-link" data-page="commands">คำสั่ง</a>
+                <a href="#" class="nav-link" data-page="premium">พรีเมียม</a>
+                <a href="#" class="nav-link" data-page="contact">ติดต่อ</a>
+            </div>
+            <div class="nav-actions">
+                <span class="status-badge online">● ออนไลน์</span>
+                <a href="#" class="btn-dashboard">Dashboard</a>
+            </div>
+        </nav>
+
+        <!-- Page Container -->
+        <div class="page-container">
+            <!-- HOME PAGE -->
+            <div class="page active" id="page-home">
+                <div class="content">
+                    <div class="header">
+                        <div class="header-left">
+                            <h1>Application Status</h1>
+                            <p>สถานะบอท และเครื่องเล่นเพลง</p>
+                        </div>
+                        <div class="status-bar">
+                            <span class="status-dot"></span>
+                            <span>ขณะนี้ทุกบริการทำงานปกติ</span>
+                        </div>
+                    </div>
+
+                    <div class="stats-row">
+                        <div class="stat-item"><span class="stat-icon">👥</span><div class="stat-data"><span class="stat-value" id="stat-users">-</span><span class="stat-label">ผู้ใช้งาน</span></div></div>
+                        <div class="stat-item"><span class="stat-icon">🖥️</span><div class="stat-data"><span class="stat-value" id="stat-servers">-</span><span class="stat-label">เซิร์ฟเวอร์</span></div></div>
+                        <div class="stat-item"><span class="stat-icon">📡</span><div class="stat-data"><span class="stat-value" id="stat-clusters">-</span><span class="stat-label">คลัสเตอร์</span></div></div>
+                        <div class="stat-item"><span class="stat-icon">🎵</span><div class="stat-data"><span class="stat-value" id="stat-shards">-</span><span class="stat-label">ชาร์ด</span></div></div>
+                        <div class="stat-item"><span class="stat-icon">🎧</span><div class="stat-data"><span class="stat-value" id="stat-playing">-</span><span class="stat-label">กำลังเล่น/เชื่อมต่อ</span></div></div>
+                        <div class="stat-item"><span class="stat-icon">💾</span><div class="stat-data"><span class="stat-value" id="stat-latency">-</span><span class="stat-label">Latency</span></div></div>
+                    </div>
+
+                    <div class="main-grid">
+                        <div class="section">
+                            <h2 class="section-title">คลัสเตอร์</h2>
+                            <div class="clusters-list">
+                                <div class="cluster-card">
+                                    <div class="cluster-icon">⚡</div>
+                                    <div class="cluster-info"><h3>คลัสเตอร์ 0</h3><p id="cluster-info">กำลังโหลด...</p></div>
+                                    <div class="cluster-memory"><span class="memory-label">Latency</span><span class="memory-value" id="cluster-latency">-</span></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="section">
+                            <h2 class="section-title">เครื่องเล่นเพลง</h2>
+                            <div class="players-list">
+                                <div class="player-card">
+                                    <div class="player-header"><span class="player-dot online"></span><span class="player-name" id="player-name">WAVE BOT [Main]</span></div>
+                                    <div class="player-stats">
+                                        <div class="player-stat"><span class="label">เชื่อมต่อ:</span><span class="value" id="player-connections">-</span></div>
+                                        <div class="player-stat"><span class="label">กำลังเล่น:</span><span class="value" id="player-playing">-</span></div>
+                                        <div class="player-stat"><span class="label">ทำงาน:</span><span class="value" id="player-uptime">-</span></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- COMMANDS PAGE -->
+            <div class="page" id="page-commands">
+                <div class="page-content">
+                    <div class="page-header"><h1>📜 คำสั่งทั้งหมด</h1><p>รายการคำสั่งที่ใช้งานได้ใน WAVE BOT</p></div>
+                    <div class="commands-grid">
+                        <div class="command-category"><h2>🎵 คำสั่งเพลง</h2><div class="command-list">
+                            <div class="command-item"><div class="command-name">/play</div><div class="command-desc">เล่นเพลงจาก YouTube</div></div>
+                            <div class="command-item"><div class="command-name">/skip</div><div class="command-desc">ข้ามเพลงปัจจุบัน</div></div>
+                            <div class="command-item"><div class="command-name">/pause</div><div class="command-desc">หยุดเพลงชั่วคราว</div></div>
+                            <div class="command-item"><div class="command-name">/resume</div><div class="command-desc">เล่นเพลงต่อ</div></div>
+                            <div class="command-item"><div class="command-name">/stop</div><div class="command-desc">หยุดเพลงและล้างคิว</div></div>
+                            <div class="command-item"><div class="command-name">/loop</div><div class="command-desc">เปิด/ปิด loop เพลง</div></div>
+                        </div></div>
+                        <div class="command-category"><h2>📜 คำสั่งคิว</h2><div class="command-list">
+                            <div class="command-item"><div class="command-name">/queue</div><div class="command-desc">ดูรายการเพลงในคิว</div></div>
+                            <div class="command-item"><div class="command-name">/nowplaying</div><div class="command-desc">ดูเพลงที่กำลังเล่น</div></div>
+                            <div class="command-item"><div class="command-name">/clear</div><div class="command-desc">ล้างคิวทั้งหมด</div></div>
+                            <div class="command-item"><div class="command-name">/shuffle</div><div class="command-desc">สุ่มลำดับเพลงในคิว</div></div>
+                        </div></div>
+                        <div class="command-category"><h2>🔧 คำสั่งอื่นๆ</h2><div class="command-list">
+                            <div class="command-item"><div class="command-name">/leave</div><div class="command-desc">ออกจากห้องเสียง</div></div>
+                            <div class="command-item"><div class="command-name">/help</div><div class="command-desc">ดูคำสั่งทั้งหมด</div></div>
+                        </div></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PREMIUM PAGE -->
+            <div class="page" id="page-premium">
+                <div class="page-content">
+                    <div class="page-header center"><h1>👑 WAVE BOT Premium</h1><p>ปลดล็อคฟีเจอร์พิเศษสำหรับเซิร์ฟเวอร์ของคุณ</p></div>
+                    <div class="pricing-grid">
+                        <div class="pricing-card"><div class="pricing-header"><h3>Free</h3><div class="price"><span class="amount">฿0</span><span class="period">/เดือน</span></div></div><ul class="features"><li>✅ เล่นเพลงจาก YouTube</li><li>✅ คิวเพลงไม่จำกัด</li><li>✅ คำสั่งพื้นฐานทั้งหมด</li><li>❌ คุณภาพเสียง HD</li><li>❌ ไม่มีโฆษณา</li><li>❌ Priority Support</li></ul><button class="btn-plan current">ใช้งานอยู่</button></div>
+                        <div class="pricing-card featured"><div class="badge">แนะนำ</div><div class="pricing-header"><h3>Premium</h3><div class="price"><span class="amount">฿49</span><span class="period">/เดือน</span></div></div><ul class="features"><li>✅ ทุกอย่างใน Free</li><li>✅ คุณภาพเสียง HD</li><li>✅ ไม่มีโฆษณา</li><li>✅ 24/7 Mode</li><li>✅ Priority Support</li><li>✅ Custom Prefix</li></ul><button class="btn-plan premium">สมัครเลย</button></div>
+                        <div class="pricing-card"><div class="pricing-header"><h3>Lifetime</h3><div class="price"><span class="amount">฿499</span><span class="period">ตลอดชีพ</span></div></div><ul class="features"><li>✅ ทุกอย่างใน Premium</li><li>✅ จ่ายครั้งเดียว</li><li>✅ ไม่มีค่าใช้จ่ายเพิ่ม</li><li>✅ อัพเดทฟรีตลอด</li><li>✅ VIP Support</li><li>✅ Early Access</li></ul><button class="btn-plan">สมัครเลย</button></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CONTACT PAGE -->
+            <div class="page" id="page-contact">
+                <div class="page-content">
+                    <div class="page-header center"><h1>📬 ติดต่อเรา</h1><p>มีคำถามหรือข้อเสนอแนะ? ติดต่อเราได้เลย!</p></div>
+                    <div class="contact-grid">
+                        <div class="contact-card"><div class="contact-icon">💬</div><h3>Discord Server</h3><p>เข้าร่วม Discord Server ของเราเพื่อรับความช่วยเหลือ</p><a href="#" class="btn-contact">เข้าร่วม Discord</a></div>
+                        <div class="contact-card"><div class="contact-icon">📧</div><h3>Email</h3><p>ส่งอีเมลถึงเราสำหรับคำถามทางธุรกิจ</p><a href="#" class="btn-contact">ส่งอีเมล</a></div>
+                        <div class="contact-card"><div class="contact-icon">🌐</div><h3>Social Media</h3><p>ติดตามเราบนโซเชียลมีเดีย</p><div class="social-links"><a href="#" class="social-btn">Twitter</a><a href="#" class="social-btn">Facebook</a></div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer class="footer"><p>Copyright © 2025 WAVE BOT. All rights reserved.</p><p class="made-with">Made with 💗</p></footer>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
